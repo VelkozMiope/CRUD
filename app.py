@@ -48,5 +48,30 @@ def postRequest():
         'msg': 'Success!'
     })
 
+@app.route('/request/<id>', methods=['GET'])
+def getRequestId(id):
+    req_args = request.view_args
+    bks = [b.serialize() for b in db.view()]
+    if req_args:
+        for b in bks:
+            if b['id'] == int(req_args['id']):
+                return jsonify({
+                    'res': b,
+                    'status': '200',
+                    'msg': 'Success!'
+                })
+        return jsonify({
+            'error': f'Error! Book with id {req_args["id"]} was not found!',
+            'res': '',
+            'status': '404'
+        })
+    else:
+        return jsonify({
+            'res': bks,
+            'status': '200',
+            'msg': 'Success getting book by ID!',
+            'no_of_books': len(bks)
+        })
+    
 if __name__ == '__main__':
     app.run()
