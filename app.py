@@ -125,5 +125,26 @@ def putRequest():
     'status': '404'
     })
 
+@app.route('/request/<id>', methods=['DELETE'])
+def deleteRequest():
+    req_args = request.view_args
+    bks = [b.serialize() for b in db.view()]
+    if req_args:
+        for b in bks:
+            if b['id'] == int(req_args['id']):
+                db.delete(b['id'])
+                updated_bks = [b.serialize() for b in db.view()]
+                return jsonify({
+                    'res': updated_bks,
+                    'status': '200',
+                    'msg': 'Success deleting book!',
+                    'no_of_books': len(updated_bks)
+                })
+    else:
+        return jsonify({
+            'error': 'Error! No book id sent!',
+            'res': '',
+            'status': '404'
+        })
 if __name__ == '__main__':
     app.run()
