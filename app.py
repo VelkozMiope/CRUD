@@ -73,5 +73,31 @@ def getRequestId(id):
             'no_of_books': len(bks)
         })
     
+@app.route('/request', methods=['PUT'])
+def putRequest():
+    req_data = request.get_json()
+    avaliability = req_data['avaliable']
+    title = req_data['title']
+    book_id = req_data['id']
+    books = [b.serialize() for b in db.view()]
+    for b in books:
+        if b['id'] == book_id:
+            book = Book(
+                book_id,
+                avaliability,
+                title,
+                datetime.datetime.now()
+            )
+            db.update(book)
+            return jsonify({
+                'res': book.serialize(),
+                'status': '200',
+                'msg': 'Success updating the book.'
+            })
+    return jsonify({
+    'res': 'Error! Failed to update book.',
+    'status': '404'
+    })
+
 if __name__ == '__main__':
     app.run()
