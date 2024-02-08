@@ -11,28 +11,18 @@ books = [
     #     'timestamp': datetime.datetime.now()
     # },
     {
-        'avaliable': True,
-        'title': '',
+        'available': True,
+        'title': 'Mountain of Madness',
         'timestamp': datetime.datetime.now()
     },
     {
-        'avaliable': True,
-        'title': '',
+        'available': True,
+        'title': 'Call of Cthulhu',
         'timestamp': datetime.datetime.now()
     },
     {
-        'avaliable': True,
-        'title': '',
-        'timestamp': datetime.datetime.now()
-    },
-    {
-        'avaliable': True,
-        'title': '',
-        'timestamp': datetime.datetime.now()
-    },
-    {
-        'avaliable': True,
-        'title': '',
+        'available': True,
+        'title': 'Dagon',
         'timestamp': datetime.datetime.now()
     }
     
@@ -41,11 +31,11 @@ books = [
 def connect():
     conn = sqlite3.connect('books.db')
     cursor = conn.cursor()
-    cursor.execute('CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY, avaliable BOOLEAN, title TEXT, timestamp TEXT)')
+    cursor.execute('CREATE TABLE IF NOT EXISTS books (id INTEGER PRIMARY KEY, available BOOLEAN, title TEXT, timestamp TEXT)')
     conn.commit()
     conn.close()
     for i in books:
-        bk = Book(getNewId(), i['avaliable'], i['title'], i['timestamp'])
+        bk = Book(getNewId(), i['available'], i['title'], i['timestamp'])
         insert(bk)
 
 def insert(book):
@@ -75,7 +65,7 @@ def view():
 def update(book):
     conn = sqlite3.connect('books.db')
     cursor = conn.cursor()
-    cursor.execute('UPDATE books SET avaliable=?, title=? WHERE id=?', (book.avaliable, book.title, book.id))
+    cursor.execute('UPDATE books SET available=?, title=? WHERE id=?', (book.available, book.title, book.id))
     conn.commit()
     conn.close()
 

@@ -10,6 +10,7 @@ if not os.path.isfile('books.db'):
 @app.route('/')
 def index():
     return render_template('index.html')
+
 def isValid(email):
     regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
     if re.fullmatch(regex, email):
@@ -102,7 +103,7 @@ def getRequestId(id):
 @app.route('/request', methods=['PUT'])
 def putRequest():
     req_data = request.get_json()
-    avaliability = req_data['avaliable']
+    availability = req_data['available']
     title = req_data['title']
     book_id = req_data['id']
     books = [b.serialize() for b in db.view()]
@@ -110,7 +111,7 @@ def putRequest():
         if b['id'] == book_id:
             book = Book(
                 book_id,
-                avaliability,
+                availability,
                 title,
                 datetime.datetime.now()
             )
@@ -146,5 +147,6 @@ def deleteRequest():
             'res': '',
             'status': '404'
         })
+    
 if __name__ == '__main__':
     app.run()

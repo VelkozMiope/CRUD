@@ -1,8 +1,8 @@
 class Book:
-    def __init__(self, id, avaliable, title, timestamp):
+    def __init__(self, id, available, title, timestamp):
         self.id = id
         self.title = title
-        self.avaliable = avaliable
+        self.available = available
         self.timestamp = timestamp
 
     def __repr__(self):
@@ -12,6 +12,6 @@ class Book:
         return {
             'id': self.id,
             'title': self.title,
-            'avaliable': self.avaliable,
+            'available': self.available,
             'timestamp': self.timestamp
         }
