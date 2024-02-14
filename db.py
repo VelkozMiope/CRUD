@@ -5,11 +5,6 @@ def getNewId():
     return random.getrandbits(28)
 
 books = [
-    # {
-    #     'available': True,
-    #     'title': 'Don Quixote',
-    #     'timestamp': datetime.datetime.now()
-    # },
     {
         'available': True,
         'title': 'Mountain of Madness',
@@ -25,7 +20,6 @@ books = [
         'title': 'Dagon',
         'timestamp': datetime.datetime.now()
     }
-    
 ]
 
 def connect():
@@ -69,10 +63,10 @@ def update(book):
     conn.commit()
     conn.close()
 
-def delete(theId):
+def delete(id):
     conn = sqlite3.connect('books.db')
     cursor = conn.cursor()
-    cursor.execute('DELETE FROM books WHERE id=?', (theId))
+    cursor.execute('DELETE FROM books WHERE id=?', (id,))
     conn.commit()
     conn.close()
 
