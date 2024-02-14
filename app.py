@@ -1,11 +1,8 @@
 from flask import Flask, render_template, request, jsonify
-from logging import FileHandler,WARNING
 import os, re, datetime
 import db
 from models import Book
 app = Flask(__name__)
-file_handler = FileHandler('errorlog.txt')
-file_handler.setLevel(WARNING)
 
 if not os.path.isfile('books.db'):
     db.connect()
