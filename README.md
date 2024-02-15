@@ -104,6 +104,3 @@ Contem a função postRequest(), onde ele:
 ## Link original:
 
 https://medium.com/@hillarywando/how-to-create-a-basic-crud-api-using-python-flask-cd68ef5fd7e3
-
-```python
-```
