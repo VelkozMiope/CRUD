@@ -18,7 +18,7 @@ HTML e CSS já prontos, feitos por Hillary Wando (@Wandonium).
 <img src="./images/get_no_id.png">
 
 ### GET id:
-<img src="./images/get_all.png">
+<img src="./images/get_id.png">
 
 ### PUT:
 <img src="./images/put.png">
