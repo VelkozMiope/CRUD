@@ -69,10 +69,3 @@ def delete(id):
     cursor.execute('DELETE FROM books WHERE id=?', (id,))
     conn.commit()
     conn.close()
-
-def deleteAll():
-    conn = sqlite3.connect('books.db')
-    cursor = conn.cursor()
-    cursor.execute('DELETE FROM books')
-    conn.commit()
-    conn.close()
