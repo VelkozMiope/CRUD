@@ -48,29 +48,13 @@ def postRequest():
 
 @app.route('/request', methods=['GET'])
 def getRequest():
-    content_type = request.headers.get('Content-Type')
     bks = [b.serialize() for b in db.view()]
-    if (content_type == 'application/json'):
-        json = request.json
-        for b in bks:
-            if b['id'] == int(json['id']):
-                return jsonify({
-                    'res': b,
-                    'status': '200',
-                    'msg': 'Success!'
-                })
-        return jsonify({
-            'error': f'Error! Book with id "{json["id"]}" not found!',
-            'res': '',
-            'status': '404'
-        })
-    else:
-        return jsonify({
-            'res': bks,
-            'status': '200',
-            'msg': 'Success!',
-            'no_of_books': len(bks)
-        })
+    return jsonify({
+        'res': bks,
+        'status': '200',
+        'msg': 'Success!',
+        'no_of_books': len(bks)
+    })
 
 @app.route('/request/<id>', methods=['GET'])
 def getRequestId(id):
@@ -91,10 +75,9 @@ def getRequestId(id):
         })
     else:
         return jsonify({
-            'res': bks,
-            'status': '200',
-            'msg': 'Success getting book by ID!',
-            'no_of_books': len(bks)
+            'res': '',
+            'error': 'No arguments given',
+            'status': '404'
         })
     
 @app.route('/request', methods=['PUT'])
